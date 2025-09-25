@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<title>სკოლის ვებ-გვერდი</title>
+<style>
+body { font-family: Arial; margin:0; padding:0; background:#f9f9f9; }
+header { background:#e60ec5; color:#0e15e6; padding:20px; text-align:center; }
+nav a { margin:0 15px; color:white; text-decoration:none; font-weight:bold; cursor:pointer; }
+nav a:hover { text-decoration:underline; }
+.container { max-width:1000px; margin:20px auto; padding:10px; }
+.teacher-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; }
+.teacher-card { background:white; padding:10px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1); text-align:center; }
+.teacher-card img { width:100%; height:200px; object-fit:cover; border-radius:8px; cursor:pointer; transition: transform 0.2s; }
+.teacher-card img:hover { transform: scale(1.05); }
+form { display:flex; flex-direction:column; max-width:400px; margin:auto; }
+input, textarea { margin-bottom:10px; padding:10px; border-radius:5px; border:1px solid #ccc; }
+button { padding:10px; border:none; border-radius:5px; background:#07e7eb; color:white; font-weight:bold; cursor:pointer; }
+button:hover { background:#45a049; }
+footer { background:#333; color:white; text-align:center; padding:15px; margin-top:30px; }
+
+/* Lightbox */
+#lightbox { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:1000; }
+#lightbox img { max-width:90%; max-height:90%; border-radius:8px; }
+#lightbox span { position:absolute; top:20px; right:30px; color:white; font-size:40px; font-weight:bold; cursor:pointer; }
+
+/* პედაგოგების სურათები — დარჩა cover */
+#teachers1 .teacher-card img {
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  border-radius:8px;
+  cursor:pointer;
+  transition: transform 0.2s;
+}
+
+/* ადმინისტრაციის სურათები — contain, რომ თავი არ მოიჭრას */
+#teachers2 .teacher-card img {
+  width:100%;
+  max-height:200px;
+  object-fit:contain;
+  background:#f0f0f0; /* ცარიელი ადგილები ნაცრისფერი ფონის იქნება */
+  border-radius:8px;
+  cursor:pointer;
+  transition: transform 0.2s;
+}
+.scroll-box {
+  border: 10px solid #37E6CF;
+  width: 80%;
+  margin: 20px auto;
+  overflow: hidden;
+  height: 50px;
+  position: relative;
+  background-color: #37E6CF;
+}
+
+.scroll-text {
+  position: absolute;
+  white-space: nowrap;
+  font-size: 30px;
+  color: #2c3e50;
+  animation: scroll-left 10s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: -100%;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<header>
+<h1>ქვედა სიმონეთის N2 საჯარო სკოლა</h1>
+<nav>
+<a onclick="showPage('home')">მთავარი</a>
+<a onclick="showPage('teachers1')">პედაგოგები</a>
+<a onclick="showPage('teachers2')">ადმინისტრაცია</a>
+<a onclick="showPage('about')">სკოლის ისტორია</a>
+<a onclick="showPage('portfolio')">პორთფოლიო</a>
+<a onclick="showPage('departments')">კათედრები</a>
+<a onclick="showPage('resources')">რესურსი</a>
+<a onclick="showPage('rules')">შინაგანაწესი</a>
+<a onclick="showPage('projects')">პროექტები</a>
+<a onclick="showPage('contact')">კონტაქტი</a>
+</nav>
+</header>
+
+<div class="container">
+
+  <!-- მთავარი გვერდი -->
+  <div id="home" class="page">
+  <div class="scroll-box">
+  <div class="scroll-text">სწავლის ძირი მწარე არის კენწეროში გატკბილდების</div>
+</div>
+    <h2>მთავარი გვერდი</h2>
+	
+
+	
+    <p>მოგესალმებით ჩვენს სკოლაში! აქ შეგიძლიათ ნახოთ პედაგოგები, ინფორმაცია სკოლაზე და დაგვიკავშირდეთ.</p>
+  </div>
+
+  <!-- პედაგოგები -->
+  <div id="teachers1" class="page" style="display:none;">
+    <h2>პედაგოგები – ნაწილი 1</h2>
+    <div class="teacher-grid">
+      <div class="teacher-card">
+        <img src="2.jpg" alt="პედაგოგი 2" onclick="openLightbox(this.src)">
+        <h3>დავით რობაქიძე</h3><p>სპორტის მასწავლებელი</p>
+      </div>
+      <div class="teacher-card">
+        <img src="9.jpg" alt="პედაგოგი 2" onclick="openLightbox(this.src)">
+        <h3>დათუნა გოქაძე.</h3><p>ისტორიის მასწავლებელი</p>
+      </div>
+      <div class="teacher-card">
+        <img src="1.jpg" alt="პედაგოგი 1" onclick="openLightbox(this.src)">
+        <h3>ზაზა ლიკლიკაძე</h3><p>ინფორმაციულ საკომუნიკაციო ტექნოლოგიების მასწავლებელი</p>
+      </div>
+      <div class="teacher-card">
+        <img src="7.jpg" alt="პედაგოგი 7" onclick="openLightbox(this.src)">
+        <h3>თინათინ ბეჟაშვილი</h3><p>ქიმიის მასწავლებელი</p>
+      </div>
+      <div class="teacher-card">
+        <img src="8.jpg" alt="პედაგოგი 8" onclick="openLightbox(this.src)">
+        <h3>ნანული არაბიძე</h3><p>დაწყებითებითი კლასების მასწავლებელი</p>
+      </div>
+      <div class="teacher-card">
+        <img src="5.jpg" alt="პედაგოგი 5" onclick="openLightbox(this.src)">
+        <h3>ლარისა ტომარაძე</h3><p>რუსული ენის მასწავლებელი</p>
+      </div>
+      <div class="teacher-card">
+        <img src="11.jpg" alt="პედაგოგი 11" onclick="openLightbox(this.src)">
+        <h3>ცარო ჭელიძე</h3><p>ქართული ენა და ლიტერატურის მასწავლებელი</p>
+      </div>
+      <div class="teacher-card">
+        <img src="12.jpg" alt="პედაგოგი 12" onclick="openLightbox(this.src)">
+        <h3>ფატმან კლდიაშვილი</h3><p>დაწყებითი კლასების მასწავლებელი</p>
+      </div>
+      <div class="teacher-card">
+        <img src="14.jpg" alt="პედაგოგი 14" onclick="openLightbox(this.src)">
+        <h3>ფიქრია ჯიშიაშვილი</h3><p>ხელოვნების მასწავლებელი</p>
+      </div>
+      <div class="teacher-card">
+        <img src="15.jpg" alt="პედაგოგი 15" onclick="openLightbox(this.src)">
+        <h3>ნათია გიორგაძე</h3><p>ქართული ენა და ლიტერატურის მასწავლებელი</p>
+      </div>
+      <div class="teacher-card">
+        <img src="16.jpg" alt="პედაგოგი 16" onclick="openLightbox(this.src)">
+        <h3>ლია ფუტკარაძე</h3><p>ინგლისური ენის მასწავლებელი</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ადმინისტრაცია -->
+  <div id="teachers2" class="page" style="display:none;">
+    <h2>ადმინისტრაცია – ნაწილი 2</h2>
+    <div class="teacher-grid">
+      <div class="teacher-card">
+        <img src="7.jpg" alt="პედაგოგი 7" onclick="openLightbox(this.src)">
+        <h3>თინათინ ბეჟაშვილი.</h3><p>სკოლის დირექტორი</p>
+      </div>
+      <div class="teacher-card">
+        <img src="2.jpg" alt="პედაგოგი 2" onclick="openLightbox(this.src)">
+        <h3>დავით რობაქიძე</h3><p>დირექტორის მოადგილე</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- სკოლის ისტორია -->
+  <div id="about" class="page" style="display:none;">
+    <h2>სკოლის ისტორია</h2>
+    <p>ჩვენი სკოლა ცნობილია მაღალი ხარისხის განათლებით და პროფესიონალი პედაგოგებით. აქ სტუდენტებს საშუალება აქვთ განვითარდნენ სხვადასხვა საგანში და მიიღონ თანამედროვე ცოდნა.</p>
+  </div>
+
+  <!-- პორთფოლიო -->
+  <div id="portfolio" class="page" style="display:none;">
+    <h2>პორთფოლიო</h2>
+    <p>აქ განთავსდება პედაგოგებისა და მოსწავლეების მიღწევები, ნამუშევრები და წარმატებები.</p>
+  </div>
+
+  <!-- კათედრები -->
+  <div id="departments" class="page" style="display:none;">
+    <h2>კათედრები</h2>
+    <p>სკოლაში ფუნქციონირებს სხვადასხვა საგნობრივი კათედრები, რომლებიც უზრუნველყოფენ საგანმანათლებლო პროცესის ეფექტიანობას.</p>
+  <ul>
+    <li>ქიმიის კათედრა</li>
+    <li>ფიზიკის კათედრა</li>
+    <li>ქართული ენისა და ლიტერატურის კათედრა</li>
+  </ul>
+  </div>
+
+  <!-- რესურსი -->
+  <div id="resources" class="page" style="display:none;">
+    <h2>რესურსი</h2>
+    <p>აქ წარმოდგენილი იქნება სასწავლო მასალები, სასარგებლო ბმულები და რესურსები მოსწავლეებისა და პედაგოგებისთვის.</p>
+  </div>
+
+  <!-- შინაგანაწესი -->
+  <div id="rules" class="page" style="display:none;">
+    <h2>შინაგანაწესი</h2>
+    <p>სკოლის შინაგანაწესი განსაზღვრავს მოსწავლეთა და პედაგოგთა ქცევის ნორმებს, ვალდებულებებსა და უფლებებს.</p>
+  </div>
+
+  <!-- პროექტები -->
+  <div id="projects" class="page" style="display:none;">
+    <h2>პროექტები</h2>
+    <p>სკოლის ფარგლებში ხორციელდება სხვადასხვა საგანმანათლებლო და სოციალურ-კულტურული პროექტები.</p>
+  </div>
+
+  <!-- კონტაქტი -->
+  <div id="contact" class="page" style="display:none;">
+    <h2>კონტაქტი</h2>
+    <div style="background: rgba(255,255,255,0.1); padding:10px; border-radius:50px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.4); max-width:900px;">
+      <h2 style="color:#FFD700;margin-bottom:20px;">კონტაქტი</h2>
+      <p style="font-size:24px;">📞 577-652998</p>
+      <a href="tel:577280832" style="display:inline-block;background:#02C3F2;color:#fff;padding:10px 20px;border-radius:15px;text-decoration:none;margin-top:15px;">📞 დაგვირეკე</a>
+      <p style="font-size:22px;">📍 სოფელი ქვედა სიმონეთი</p>
+      <p style="font-size:20px;"></p>
+
+    </div>
+  </div> <!-- contact დასრულდა -->
+
+</div> <!-- container დახურვა -->
+
+<!-- Lightbox -->
+<div id="lightbox" onclick="closeLightbox()">
+  <span>&times;</span>
+  <img id="lightbox-img" src="">
+</div>
+
+<footer>ყველა უფლება დაცულია &copy; 2025</footer>
+
+<script>
+// გვერდების ნავიგაცია
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(page => {
+    page.style.display = (page.id === pageId) ? 'block' : 'none';
+  });
+}
+
+// Lightbox ფუნქციები
+function openLightbox(src) {
+  const lightbox = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  img.src = src;
+  lightbox.style.display = 'flex';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+}
+</script>
+
+</body>
+</html>
